@@ -2,18 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Zelda
-{
+namespace Zelda {
 
-    public class ClientMain : MonoBehaviour
-    {
+    public class ClientMain : MonoBehaviour {
         // Start is called before the first frame update
 
         ModuleInput input;
 
-        [SerializeField] GameObject role;
-        void Awake()
-        {
+        //问题
+        // [SerializeField] RoleEntity role;
+        [SerializeField] RoleEntity role;
+
+        void Awake() {
             // === Phase : Instantiate===
             input = new ModuleInput();
             //=== Phase : Inject ===
@@ -25,36 +25,46 @@ namespace Zelda
 
             Debug.Log("hello");
         }
-
+        float restDT = 0;
         // Update is called once per frame
-        void Update()
-        {
+        void Update() {
             float dt = Time.deltaTime;
             // === Phase : Input===
             Vector2 moveAxis = Vector2.zero;
-            if (Input.GetKey(KeyCode.W))
-            {
+            if (Input.GetKey(KeyCode.W)) {
                 moveAxis.y = 1;
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
+            } else if (Input.GetKey(KeyCode.S)) {
                 moveAxis.y = -1;
             }
-            if (Input.GetKey(KeyCode.A))
-            {
+            if (Input.GetKey(KeyCode.A)) {
                 moveAxis.x = -1;
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
+            } else if (Input.GetKey(KeyCode.D)) {
                 moveAxis.x = 1;
             }
+            input.moveAxis = moveAxis;
             // 左右和上下要分开写
-            moveAxis.Normalize();
-            role.transform.position += new Vector3(moveAxis.x, 0, moveAxis.y) * dt * 5;
-            Debug.Log("moveAxis:" + moveAxis.normalized);
             //=== Phase : Login===
-
+            float fixedDT = Time.fixedDeltaTime;
+            restDT += dt;
+            if (restDT >= fixedDT) {
+                while (restDT > 0) {
+                    restDT -= fixedDT;
+                    FixedTick(fixedDT);
+                }
+            } else {
+                FixedTick(restDT);
+                restDT = 0;
+            }
             //=== Phase : Draw===
         }
+        void FixedTick(float dt) {
+
+            role.Move(input.moveAxis, dt);
+            role.Face(input.moveAxis, dt);
+
+            Physics.Simulate(dt);
+        }
     }
+
+
 }

@@ -119,11 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &236469243 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100030, guid: 48b54176159440ea9a9adf323fc5b2b6, type: 3}
-  m_PrefabInstance: {fileID: 1959996656}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &236469245 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400030, guid: 48b54176159440ea9a9adf323fc5b2b6, type: 3}
@@ -266,6 +261,7 @@ GameObject:
   - component: {fileID: 861914427}
   - component: {fileID: 861914426}
   - component: {fileID: 861914425}
+  - component: {fileID: 861914429}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -361,6 +357,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &861914429
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861914424}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1274068902
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,7 +538,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9abda4e98a5edb647bf54d189f5cbb91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  role: {fileID: 236469243}
+  role: {fileID: 1944499464}
 --- !u!1 &1786719296
 GameObject:
   m_ObjectHideFlags: 0
@@ -617,6 +640,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1944499463}
+  - component: {fileID: 1944499465}
+  - component: {fileID: 1944499466}
+  - component: {fileID: 1944499464}
   m_Layer: 0
   m_Name: Role
   m_TagString: Untagged
@@ -633,13 +659,76 @@ Transform:
   m_GameObject: {fileID: 1944499462}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7955034, y: -6.282146, z: -5.3897486}
+  m_LocalPosition: {x: 0, y: 0.387, z: 1.019}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 754535213}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1944499464
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944499462}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce5ecbf1d4922947a61fe9f851c6853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyTF: {fileID: 754535213}
+  rb: {fileID: 1944499465}
+  mvoeSpeed: 5
+--- !u!54 &1944499465
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944499462}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 80
+  m_CollisionDetection: 0
+--- !u!65 &1944499466
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1944499462}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.8206222, y: 1.8339856, z: 1.0475919}
+  m_Center: {x: 0.029576898, y: 0.90414894, z: 0.023795962}
 --- !u!1001 &1959996656
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -654,15 +743,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 48b54176159440ea9a9adf323fc5b2b6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.7955034
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 48b54176159440ea9a9adf323fc5b2b6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.282146
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 48b54176159440ea9a9adf323fc5b2b6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.3897486
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400030, guid: 48b54176159440ea9a9adf323fc5b2b6, type: 3}
       propertyPath: m_LocalRotation.w
