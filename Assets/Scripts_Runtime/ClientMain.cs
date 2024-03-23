@@ -44,8 +44,8 @@ namespace Zelda {
             input.moveAxis = moveAxis;
             // 左右和上下要分开写
             //=== Phase : Login===
-            float fixedDT = Time.fixedDeltaTime;
-            restDT += dt;
+            float fixedDT = Time.fixedDeltaTime; // 0.02
+            restDT += dt;// 0.0083 (0.0000000001, 10)
             if (restDT >= fixedDT) {
                 while (restDT > 0) {
                     restDT -= fixedDT;
