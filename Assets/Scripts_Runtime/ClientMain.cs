@@ -43,6 +43,14 @@ namespace Zelda {
             }
             input.moveAxis = moveAxis;
             // 左右和上下要分开写
+            if (Input.GetKeyDown(KeyCode.Space)) {
+                input.isAttack = true;
+                Debug.Log(input.isAttack);
+            } else {
+                input.isAttack = false;
+            }
+
+            // input.isAttack = Input.GetKeyDown(KeyCode.Space);
             //=== Phase : Login===
             float fixedDT = Time.fixedDeltaTime; // 0.02
             restDT += dt;// 0.0083 (0.0000000001, 10)
@@ -61,7 +69,10 @@ namespace Zelda {
 
             role.Move(input.moveAxis, dt);
             role.Face(input.moveAxis, dt);
-
+            if (input.isAttack) {
+                
+                role.Anim_Attack();
+            }
             Physics.Simulate(dt);
         }
     }
