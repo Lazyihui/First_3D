@@ -51,7 +51,7 @@ namespace Zelda {
 
             role.Move(input.moveAxis, dt);
             role.Face(input.moveAxis, dt);
-            role.Jump(input.isJump);
+            // 记笔记 先检测再起跳
             RaycastHit[] hits = Physics.RaycastAll(role.transform.position + Vector3.up, Vector3.down, 1.05f);
             if (hits != null) {
                 for (int i = 0; i < hits.Length; i++) {
@@ -63,6 +63,7 @@ namespace Zelda {
                 }
                 Debug.Log("isGrounded" + role.isGrounded);
             }
+            role.Jump(input.isJump);
 
             if (input.isAttack) {
                 role.Anim_Attack();
