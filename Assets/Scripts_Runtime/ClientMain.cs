@@ -25,32 +25,14 @@ namespace Zelda {
 
             Debug.Log("hello");
         }
+        //记笔记restTD 找出restDT为什么为0
         float restDT = 0;
         // Update is called once per frame
         void Update() {
             float dt = Time.deltaTime;
             // === Phase : Input===
-            Vector2 moveAxis = Vector2.zero;
-            if (Input.GetKey(KeyCode.W)) {
-                moveAxis.y = 1;
-            } else if (Input.GetKey(KeyCode.S)) {
-                moveAxis.y = -1;
-            }
-            if (Input.GetKey(KeyCode.A)) {
-                moveAxis.x = -1;
-            } else if (Input.GetKey(KeyCode.D)) {
-                moveAxis.x = 1;
-            }
-            input.moveAxis = moveAxis;
-            // 左右和上下要分开写
-            if (Input.GetKeyDown(KeyCode.Space)) {
-                input.isAttack = true;
-                Debug.Log(input.isAttack);
-            } else {
-                input.isAttack = false;
-            }
+            input.Process();
 
-            // input.isAttack = Input.GetKeyDown(KeyCode.Space);
             //=== Phase : Login===
             float fixedDT = Time.fixedDeltaTime; // 0.02
             restDT += dt;// 0.0083 (0.0000000001, 10)
@@ -69,8 +51,20 @@ namespace Zelda {
 
             role.Move(input.moveAxis, dt);
             role.Face(input.moveAxis, dt);
+            role.Jump(input.isJump);
+            RaycastHit[] hits = Physics.RaycastAll(role.transform.position + Vector3.up, Vector3.down, 1.05f);
+            if (hits != null) {
+                for (int i = 0; i < hits.Length; i++) {
+                    var hit = hits[i];
+                    if (hit.collider.CompareTag("Ground")) {
+                        role.SetGround(true);
+                        break;
+                    }
+                }
+                Debug.Log("isGrounded" + role.isGrounded);
+            }
+
             if (input.isAttack) {
-                
                 role.Anim_Attack();
             }
             Physics.Simulate(dt);

@@ -18,6 +18,8 @@ namespace Zelda {
         float time;
 
         float duration;
+
+       public  bool isGrounded;
         public void Ctor() {
         }
         //问题 为什么两个Move可以一起
@@ -29,6 +31,19 @@ namespace Zelda {
             } else {
                 anim.SetFloat("F_MoveSpeed", 0);
             }
+        }
+
+        public void Jump(bool isJumpKeyDown) {
+            if (isJumpKeyDown && isGrounded) {
+                Vector3 velo = rb.velocity;
+                velo.y = 5;
+                rb.velocity = velo;
+                isGrounded = false;
+            }
+        }
+
+        public void SetGround(bool isGround) {
+            this.isGrounded = isGround;
         }
         // 记笔记
         public void Anim_Attack() {
@@ -105,10 +120,17 @@ namespace Zelda {
         }
         // normalize and normalized 区别
         public void Move(Vector2 inputAxis, float moveSpeed, float dt) {
+            // 移动的时候不能改y轴,改变y轴会导致角色飞起来 不落地了 记笔记
+            // 过程也记笔记
+            Vector3 velo = rb.velocity;
+            float oldY = velo.y;
             Vector3 moveDir = new Vector3(inputAxis.x, 0, inputAxis.y);
             moveDir.Normalize();
             //  记 veloctity
-            rb.velocity = moveDir * moveSpeed;
+            velo = moveDir * moveSpeed;
+            velo.y = oldY;
+            rb.velocity = velo;
+
         }
 
     }
