@@ -9,6 +9,8 @@ namespace Zelda {
 
         ModuleInput input;
 
+        ModuleAssets assets;
+
         //问题
         // [SerializeField] RoleEntity role;
         [SerializeField] RoleEntity role;
@@ -19,6 +21,7 @@ namespace Zelda {
             //=== Phase : Inject ===
 
             // === Phase :Init==
+            assets.Load();
 
             //=== Phase: Enter Game ===
 
