@@ -19,7 +19,9 @@ namespace Zelda {
 
         float duration;
 
-       public  bool isGrounded;
+        public bool isGrounded;
+
+        public Action<Collision> OnCollisionEnterHandle;
         public void Ctor() {
         }
         //问题 为什么两个Move可以一起
@@ -133,5 +135,19 @@ namespace Zelda {
 
         }
 
+        void OnCollisionEnter(Collision other) {
+            OnCollisionEnterHandle.Invoke(other);
+        }
+        void OnCollisionStay(Collision other) {
+        }
+        void OnCollisionExit(Collision other) {
+        }
+
+        void OnTriggerEnter(Collider other) {
+        }
+        void OnTriggerStay(Collider other) {
+        }
+        void OnTriggerExit(Collider other) {
+        }
     }
 }
