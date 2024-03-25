@@ -11,6 +11,8 @@ namespace Zelda {
 
         ModuleAssets assets;
 
+        GameContext gameContext;
+
         //问题
         // [SerializeField] RoleEntity role;
         [SerializeField] RoleEntity role;
@@ -18,12 +20,16 @@ namespace Zelda {
         void Awake() {
             // === Phase : Instantiate===
             input = new ModuleInput();
+            assets = new ModuleAssets();
+            gameContext = new GameContext();
             //=== Phase : Inject ===
 
             // === Phase :Init==
             assets.Load();
+            gameContext.Inject(assets);
 
             //=== Phase: Enter Game ===
+            BussinessGame.Enter(gameContext);
 
 
             Debug.Log("hello");

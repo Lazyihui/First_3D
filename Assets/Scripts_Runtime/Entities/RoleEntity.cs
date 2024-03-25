@@ -15,13 +15,15 @@ namespace Zelda {
 
         Vector3 endForward;
 
+        public int id;
+
         float time;
 
         float duration;
 
         public bool isGrounded;
 
-        public Action<Collision> OnCollisionEnterHandle;
+        public Action<RoleEntity,Collision> OnCollisionEnterHandle;
         public void Ctor() {
         }
         //问题 为什么两个Move可以一起
@@ -136,7 +138,7 @@ namespace Zelda {
         }
 
         void OnCollisionEnter(Collision other) {
-            OnCollisionEnterHandle.Invoke(other);
+            OnCollisionEnterHandle.Invoke(this,other);
         }
         void OnCollisionStay(Collision other) {
         }
