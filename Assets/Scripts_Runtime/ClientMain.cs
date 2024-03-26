@@ -15,7 +15,7 @@ namespace Zelda {
 
         //问题
         // [SerializeField] RoleEntity role;
-        [SerializeField] RoleEntity role;
+        // [SerializeField] RoleEntity role;
 
         void Awake() {
             // === Phase : Instantiate===
@@ -26,7 +26,7 @@ namespace Zelda {
 
             // === Phase :Init==
             assets.Load();
-            gameContext.Inject(assets);
+            gameContext.Inject(assets,input);
 
             //=== Phase: Enter Game ===
             BussinessGame.Enter(gameContext);
@@ -57,32 +57,13 @@ namespace Zelda {
             //=== Phase : Draw===
         }
         void FixedTick(float dt) {
-
-            role.Move(input.moveAxis, dt);
-            role.Face(input.moveAxis, dt);
-            // 记笔记 先检测再起跳
-            // CheckGround();
-
-
-            if (input.isAttack) {
-                role.Anim_Attack();
-            }
+            // === Phase:Logic===
+            BussinessGame.FixedTick(gameContext, dt);
+            // === phade: Simulate===
             Physics.Simulate(dt);
         }
 
-        void CheckGround() {
-            RaycastHit[] hits = Physics.RaycastAll(role.transform.position + Vector3.up, Vector3.down, 1.05f);
-            if (hits != null) {
-                for (int i = 0; i < hits.Length; i++) {
-                    var hit = hits[i];
-                    if (hit.collider.CompareTag("Ground")) {
-                        role.SetGround(true);
-                        break;
-                    }
-                }
-            }
-            role.Jump(input.isJump);
-        }
+       
     }
 
 

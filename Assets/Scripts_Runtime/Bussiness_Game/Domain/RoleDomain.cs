@@ -1,5 +1,8 @@
 using System;
+using System;
 using UnityEngine;
+using System.Collections;
+
 
 namespace Zelda{
     public static class RoleDomain{
@@ -12,8 +15,10 @@ namespace Zelda{
             return role;
         }
 
-        static void OnCollisionEnter(RoleEntity role,Collision collision ){
-            //TODO
+        static void OnCollisionEnter(RoleEntity role,Collision other ){
+            if(other.gameObject.CompareTag("Ground")){
+                role.SetGround(true);
+            }
         }
     }
 }
