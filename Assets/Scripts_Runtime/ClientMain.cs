@@ -27,7 +27,7 @@ namespace Zelda {
             moduleCamera = new ModuleCamera();
             //=== Phase : Inject ===
             moduleCamera.Inject(mainCamera);
-            gameContext.Inject(assets,input,moduleCamera);
+            gameContext.Inject(assets, input, moduleCamera);
 
             // === Phase :Init==
             assets.Load();
@@ -44,7 +44,7 @@ namespace Zelda {
         void Update() {
             float dt = Time.deltaTime;
             // === Phase : Input===
-            input.Process();
+            input.Process(moduleCamera.camera.transform.rotation);
 
             //=== Phase : Login===
             float fixedDT = Time.fixedDeltaTime; // 0.02
@@ -67,7 +67,7 @@ namespace Zelda {
             Physics.Simulate(dt);
         }
 
-       
+
     }
 
 
