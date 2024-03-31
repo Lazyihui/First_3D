@@ -24,11 +24,15 @@ namespace Zelda {
 
         public static void LateTick(GameContext ctx, float dt) {
             // 相机跟随
-                ModuleCamera camera = ctx.moduleCamera;
-                bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity role);
-                if (hasOwner) {
-                    camera.Follow(role.transform.position, 2, 3);
-                }
+            ModuleCamera moduleCamera = ctx.moduleCamera;
+            bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity role);
+            if (hasOwner) {
+                moduleCamera.Follow(role.transform.position, 2, 3);
+            }
+
+            // 相机旋转
+            moduleCamera.Rotate(ctx.input.cameraRoationAxis,dt);
+
         }
         // 检测地面代码
         static void CheckGround(RoleEntity role) {
