@@ -32,6 +32,7 @@ namespace Zelda {
 
             // 相机旋转
             moduleCamera.Rotate(ctx.input.cameraRoationAxis,dt);
+            // moduleCamera.RotateByEuler(ctx.input.cameraRoationAxis,dt);
 
         }
         // 检测地面代码

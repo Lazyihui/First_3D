@@ -37,7 +37,15 @@ namespace Zelda {
 
             camera.transform.forward = fwd;
 
+        }
 
+        public void RotateByEuler(Vector2 axis, float dt) {
+            // 欧拉角 有万象解锁问题
+            float sensitivity = 60f * dt;
+            Quaternion originalRotation = camera.transform.rotation;
+            Vector3 euler = originalRotation.eulerAngles;
+            euler += new Vector3(-axis.y * sensitivity, axis.x * sensitivity, 0);
+            camera.transform.eulerAngles = euler;
 
 
         }
