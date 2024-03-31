@@ -27,12 +27,17 @@ namespace Zelda {
             ModuleCamera moduleCamera = ctx.moduleCamera;
             bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity role);
             if (hasOwner) {
-                moduleCamera.Follow(role.transform.position, 2, 3);
+                // moduleCamera.Follow(role.transform.position, 2, 3);
             }
-
+            // 相机看向
+            // moduleCamera.LookAt(role.transform.position);
+            // 注：看向会影响旋转，所以旋转失效
+            // 注：绕会影响看向和跟随
             // 相机旋转
-            moduleCamera.Rotate(ctx.input.cameraRoationAxis,dt);
+            // 因为有看向所以旋转失效
+            // moduleCamera.Rotate(ctx.input.cameraRotationAxis,dt);
             // moduleCamera.RotateByEuler(ctx.input.cameraRoationAxis,dt);
+            moduleCamera.Round(role.transform.position, ctx.input.cameraRotationAxis, new Vector2(0, 0), 5, dt);
 
         }
         // 检测地面代码

@@ -8,7 +8,7 @@ namespace Zelda {
         public bool isJump;//跳跃
         public Vector3 moveCmaeraDir;
 
-        public Vector3 cameraRoationAxis;
+        public Vector2 cameraRotationAxis;
 
         public ModuleInput() {
             isAttack = false;
@@ -54,7 +54,7 @@ namespace Zelda {
                 // float y = Input.GetAxis("Mouse Y");
                 // moveRoationAxis = new Vector3(x, y, 0);
                 //delta是上一帧和这一帧的差值
-                cameraRoationAxis = Input.mousePositionDelta;
+                cameraRotationAxis = Input.mousePositionDelta;
             }
         }
     }
