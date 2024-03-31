@@ -1,5 +1,4 @@
 using System;
-using System;
 using UnityEngine;
 using System.Collections;
 
@@ -9,7 +8,8 @@ namespace Zelda{
 
         public  static RoleEntity Spawn(GameContext ctx,int typeID){
             RoleEntity role = GameFactory.Role_Create(ctx.assets,typeID);
-            //这里有问题
+
+            // 这里是一个委托
             role.OnCollisionEnterHandle = OnCollisionEnter;
             ctx.roleRepository.Add(role);
             return role;

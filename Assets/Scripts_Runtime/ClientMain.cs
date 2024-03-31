@@ -6,10 +6,12 @@ namespace Zelda {
 
     public class ClientMain : MonoBehaviour {
         // Start is called before the first frame update
-
+        [SerializeField] Camera mainCamera;
         ModuleInput input;
 
         ModuleAssets assets;
+
+        ModuleCamera moduleCamera;
 
         GameContext gameContext;
 
@@ -22,11 +24,13 @@ namespace Zelda {
             input = new ModuleInput();
             assets = new ModuleAssets();
             gameContext = new GameContext();
+            moduleCamera = new ModuleCamera();
             //=== Phase : Inject ===
+            moduleCamera.Inject(mainCamera);
+            gameContext.Inject(assets,input,moduleCamera);
 
             // === Phase :Init==
             assets.Load();
-            gameContext.Inject(assets,input);
 
             //=== Phase: Enter Game ===
             BussinessGame.Enter(gameContext);

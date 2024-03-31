@@ -7,10 +7,17 @@ namespace Zelda {
             ctx.onwerRoleID = owner.id;
         }
         public static void FixedTick(GameContext ctx, float fixdt) {
-            bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity owner);
+
             ModuleInput input = ctx.input;
-            owner.Move(input.moveAxis, fixdt);
-            owner.Face(input.moveAxis, fixdt);
+            bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity owner);
+
+            Camera cam = ctx.moduleCamera.camera;
+            Quaternion quaternion = cam.transform.rotation;
+            Vector3 moveDir = new Vector3 (input.moveAxis.x, 0, input.moveAxis.y);
+            moveDir = quaternion * moveDir;
+            // 四元数*Vector3 = 旋转后的Vector3
+            owner.Move(moveDir, fixdt);
+            owner.Face(moveDir, fixdt);
             // 记笔记 先检测再起跳
             // CheckGround();
 
