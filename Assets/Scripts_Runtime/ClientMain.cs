@@ -59,12 +59,17 @@ namespace Zelda {
                 restDT = 0;
             }
             //=== Phase : Draw===
+            LateTick(dt);
         }
         void FixedTick(float dt) {
             // === Phase:Logic===
             BussinessGame.FixedTick(gameContext, dt);
             // === phade: Simulate===
             Physics.Simulate(dt);
+        }
+
+        void  LateTick(float dt) {
+            BussinessGame.LateTick(gameContext, dt);
         }
 
 

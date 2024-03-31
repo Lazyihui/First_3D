@@ -21,6 +21,16 @@ namespace Zelda {
                 owner.Anim_Attack();
             }
         }
+
+        public static void LateTick(GameContext ctx, float dt) {
+            // 相机跟随
+                ModuleCamera camera = ctx.moduleCamera;
+                bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity role);
+                if (hasOwner) {
+                    camera.Follow(role.transform.position, 2, 3);
+                }
+        }
+        // 检测地面代码
         static void CheckGround(RoleEntity role) {
             RaycastHit[] hits = Physics.RaycastAll(role.transform.position + Vector3.up, Vector3.down, 1.05f);
             if (hits != null) {
