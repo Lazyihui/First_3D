@@ -23,7 +23,7 @@ namespace Zelda {
 
         public bool isGrounded;
 
-        public Action<RoleEntity,Collision> OnCollisionEnterHandle;
+        public Action<RoleEntity, Collision> OnCollisionEnterHandle;
         public void Ctor() {
         }
         //问题 为什么两个Move可以一起
@@ -86,7 +86,7 @@ namespace Zelda {
         //         transform.rotation = Quaternion.Slerp(startRot, endRot, t);
         //     }
         // }
-
+        // 对比和上面的区别
         public void Face(Vector3 moveAxis, float dt) {
 
             if (moveAxis == Vector3.zero) {
@@ -138,7 +138,7 @@ namespace Zelda {
         }
 
         void OnCollisionEnter(Collision other) {
-            OnCollisionEnterHandle.Invoke(this,other);
+            OnCollisionEnterHandle.Invoke(this, other);
         }
         void OnCollisionStay(Collision other) {
         }
