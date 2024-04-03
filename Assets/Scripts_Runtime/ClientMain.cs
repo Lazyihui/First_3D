@@ -7,6 +7,11 @@ namespace Zelda {
     public class ClientMain : MonoBehaviour {
         // Start is called before the first frame update
         [SerializeField] Camera mainCamera;
+        [SerializeField] Panel_Login loginPrefab;
+
+        [SerializeField] Canvas screenCanvas;
+
+        AppUI ui;
         ModuleInput input;
 
         ModuleAssets assets;
@@ -25,7 +30,9 @@ namespace Zelda {
             assets = new ModuleAssets();
             gameContext = new GameContext();
             moduleCamera = new ModuleCamera();
+            ui = new AppUI();
             //=== Phase : Inject ===
+            ui.Inject(screenCanvas,loginPrefab);
             moduleCamera.Inject(mainCamera);
             gameContext.Inject(assets, input, moduleCamera);
 
@@ -33,6 +40,7 @@ namespace Zelda {
             assets.Load();
 
             //=== Phase: Enter Game ===
+            ui.Login_Open();
             BussinessGame.Enter(gameContext);
 
 
