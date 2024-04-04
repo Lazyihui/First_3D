@@ -32,6 +32,10 @@ namespace Zelda {
                 return;
                 // moduleCamera.Follow(role.transform.position, 2, 3);
             }
+
+
+            RoleDomain.UpdateHUD(ctx,moduleCamera.camera.transform.forward, role);
+
             // 相机看向
             // moduleCamera.LookAt(role.transform.position);
             // 注：看向会影响旋转，所以旋转失效

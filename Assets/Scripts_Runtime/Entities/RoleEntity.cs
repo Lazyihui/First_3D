@@ -22,6 +22,9 @@ namespace Zelda {
         float duration;
 
         public bool isGrounded;
+        // ui
+        public float hp;
+        public float maxHp;
 
         public Action<RoleEntity, Collision> OnCollisionEnterHandle;
         public void Ctor() {
