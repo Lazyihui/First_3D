@@ -50,25 +50,31 @@ namespace Zelda {
         }
 
 
-        #region  HUB_HpBar
 
 
-        public void HpBar_Open(int id, float hp, float maxHp) {
-            // if (hpBars == null) {
-            //     hpBars = new Dictionary<int, GameObject>();
-            // }
-            // if (hpBars.ContainsKey(id)) {
-            //     Debug.LogError("已经存在了");
-            //     return;
-            // }
-            // 记笔记
+        // public void HpBar_Open(int id, float hp, float maxHp) {
+        //     // if (hpBars == null) {
+        //     //     hpBars = new Dictionary<int, GameObject>();
+        //     // }
+        //     // if (hpBars.ContainsKey(id)) {
+        //     //     Debug.LogError("已经存在了");
+        //     //     return;
+        //     // }
+        //     // 记笔记
+        //     GameObject go = Open(nameof(HUD_HpBar), worldCanvas);
+        //     HUD_HpBar hpBar = go.GetComponent<HUD_HpBar>();
+        //     hpBar.Ctor();
+        //     hpBar.SetHp(hp, maxHp);
+        //     hpBars.Add(id, hpBar);
+        // }
+
+        public void HpBar_Open(int id, float hp, float hpMax) {
             GameObject go = Open(nameof(HUD_HpBar), worldCanvas);
             HUD_HpBar hpBar = go.GetComponent<HUD_HpBar>();
             hpBar.Ctor();
-            hpBar.SetHp(hp, maxHp);
+            hpBar.SetHp(hp, hpMax);
             hpBars.Add(id, hpBar);
         }
-        #endregion
 
         public void HpBar_UpdataPostion(int id, Vector3 postion, Vector3 cameraForward) {
 
@@ -80,7 +86,6 @@ namespace Zelda {
             bool has = assets.TryGetUIPrefab(uiName, out GameObject prefab);
             if (!has) {
                 Debug.LogError($"UI: {uiName} not found.");
-                Debug.LogError("没有找到对应的UI");
                 return null;
             }
             GameObject go = GameObject.Instantiate(prefab, canvas.transform);

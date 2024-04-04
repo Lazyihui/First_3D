@@ -7,13 +7,11 @@ namespace Zelda {
     public class ClientMain : MonoBehaviour {
         // Start is called before the first frame update
         [SerializeField] Camera mainCamera;
-        [SerializeField] Panel_Login loginPrefab;
 
         [SerializeField] Canvas screenCanvas;
 
         [SerializeField] Canvas worldCanvas;
 
-        [SerializeField] HUD_HpBar hpBarPrefab;
 
         AppUI ui;
         ModuleInput input;
@@ -24,11 +22,14 @@ namespace Zelda {
 
         GameContext gameContext;
 
+        bool isTearDown;
+
         //问题
         // [SerializeField] RoleEntity role;
         // [SerializeField] RoleEntity role;
 
         void Awake() {
+            isTearDown = false;
             // === Phase : Instantiate===
             input = new ModuleInput();
             assets = new ModuleAssets();
@@ -36,9 +37,9 @@ namespace Zelda {
             moduleCamera = new ModuleCamera();
             ui = new AppUI();
             //=== Phase : Inject ===
-            ui.Inject(assets,screenCanvas, worldCanvas);
+            ui.Inject(assets, screenCanvas, worldCanvas);
             moduleCamera.Inject(mainCamera);
-            gameContext.Inject(ui,assets, input, moduleCamera);
+            gameContext.Inject(ui, assets, input, moduleCamera);
 
             // === Phase :Init==
             ui.onStartHandle = () => {
@@ -88,6 +89,19 @@ namespace Zelda {
             BussinessGame.LateTick(gameContext, dt);
         }
 
+        void OnApplicationQuit() {
+            TearDown();
+        }
+        void OnDestroy() {
+            TearDown();
+        }
+        void TearDown() {
+            if (isTearDown) {
+                return;
+            }
+            isTearDown = true;
+            assets.Unload();
+        }
 
     }
 

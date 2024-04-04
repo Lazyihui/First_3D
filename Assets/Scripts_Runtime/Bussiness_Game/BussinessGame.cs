@@ -34,7 +34,7 @@ namespace Zelda {
             }
 
 
-            RoleDomain.UpdateHUD(ctx,moduleCamera.camera.transform.forward, role);
+            RoleDomain.UpdateHUD(ctx, moduleCamera.camera.transform.forward, role);
 
             // 相机看向
             // moduleCamera.LookAt(role.transform.position);

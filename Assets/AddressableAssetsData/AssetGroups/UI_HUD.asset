@@ -18,7 +18,7 @@ MonoBehaviour:
   m_GUID: e3b821ee9a549f74aa95266999260eca
   m_SerializeEntries:
   - m_GUID: db42b7ad9f996a7489103f97235e8d78
-    m_Address: HUP_HpBar
+    m_Address: HUD_HpBar
     m_ReadOnly: 0
     m_SerializedLabels:
     - UI
