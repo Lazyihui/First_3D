@@ -36,7 +36,7 @@ namespace Zelda {
             moduleCamera = new ModuleCamera();
             ui = new AppUI();
             //=== Phase : Inject ===
-            ui.Inject(screenCanvas, worldCanvas,loginPrefab,hpBarPrefab);
+            ui.Inject(assets,screenCanvas, worldCanvas);
             moduleCamera.Inject(mainCamera);
             gameContext.Inject(ui,assets, input, moduleCamera);
 

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: UI_HUD
+  m_EditorClassIdentifier: 
+  m_GroupName: UI_HUD
+  m_Data:
+    m_SerializedData: []
+  m_GUID: e3b821ee9a549f74aa95266999260eca
+  m_SerializeEntries:
+  - m_GUID: db42b7ad9f996a7489103f97235e8d78
+    m_Address: HUP_HpBar
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UI
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 062ff03f9e6af1f48a66fdd994a50742, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: fba57c1cfd0515a4a8a68d8edd299ca6, type: 2}
+    - {fileID: 11400000, guid: 19fec967a4b8aa04c80e309ce0e28965, type: 2}
