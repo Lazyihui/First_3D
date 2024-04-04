@@ -32,16 +32,20 @@ namespace Zelda {
             moduleCamera = new ModuleCamera();
             ui = new AppUI();
             //=== Phase : Inject ===
-            ui.Inject(screenCanvas,loginPrefab);
+            ui.Inject(screenCanvas, loginPrefab);
             moduleCamera.Inject(mainCamera);
             gameContext.Inject(assets, input, moduleCamera);
 
             // === Phase :Init==
+            ui.onStartHandle = () => {
+                BussinessGame.Enter(gameContext);
+                ui.Login_Close();
+            };
+
             assets.Load();
 
             //=== Phase: Enter Game ===
             ui.Login_Open();
-            BussinessGame.Enter(gameContext);
 
 
             Debug.Log("hello");
@@ -76,7 +80,7 @@ namespace Zelda {
             Physics.Simulate(dt);
         }
 
-        void  LateTick(float dt) {
+        void LateTick(float dt) {
             BussinessGame.LateTick(gameContext, dt);
         }
 

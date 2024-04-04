@@ -10,7 +10,9 @@ namespace Zelda {
 
             ModuleInput input = ctx.input;
             bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity owner);
-
+            if (!hasOwner) {
+                return;
+            }
             owner.Move(input.moveCmaeraDir, fixdt);
             owner.Face(input.moveCmaeraDir, fixdt);
             // 记笔记 先检测再起跳
@@ -26,7 +28,8 @@ namespace Zelda {
             // 相机跟随
             ModuleCamera moduleCamera = ctx.moduleCamera;
             bool hasOwner = ctx.roleRepository.TryGet(ctx.onwerRoleID, out RoleEntity role);
-            if (hasOwner) {
+            if (!hasOwner) {
+                return;
                 // moduleCamera.Follow(role.transform.position, 2, 3);
             }
             // 相机看向
