@@ -11,6 +11,7 @@ namespace Zelda {
 
         public void Add(RoleEntity role) {
             all.Add(role.id, role);
+            
         }
 
         public void Remove(RoleEntity role) {

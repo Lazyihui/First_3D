@@ -55,16 +55,20 @@ namespace Zelda {
 
             Debug.Log("hello");
         }
-        //记笔记restTD 找出restDT为什么为0
+        //记笔记restTD 找出restDT为什么为0 √
         float restDT = 0;
         // Update is called once per frame
         void Update() {
+
             float dt = Time.deltaTime;
             // === Phase : Input===
             input.Process(moduleCamera.camera.transform.rotation);
 
             //=== Phase : Login===
+            // fixeDT系统的固定时间
             float fixedDT = Time.fixedDeltaTime; // 0.02
+            // dt会变化
+            // 这个代码保证了每一帧都会运行一次
             restDT += dt;// 0.0083 (0.0000000001, 10)
             if (restDT >= fixedDT) {
                 while (restDT > 0) {
@@ -78,6 +82,8 @@ namespace Zelda {
             //=== Phase : Draw===
             LateTick(dt);
         }
+
+
         void FixedTick(float dt) {
             // === Phase:Logic===
             BussinessGame.FixedTick(gameContext, dt);

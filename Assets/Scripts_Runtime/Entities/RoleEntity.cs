@@ -29,7 +29,7 @@ namespace Zelda {
         public Action<RoleEntity, Collision> OnCollisionEnterHandle;
         public void Ctor() {
         }
-        //问题 为什么两个Move可以一起
+        //问题 为什么两个Move可以一起 √ 因为参数不一样 所以是两个不一样的函数
         public void Move(Vector3 moveAxis, float dt) {
             Move(moveAxis, this.mvoeSpeed, dt);
             // mangnitude 速度的大小 记笔记
