@@ -25,7 +25,13 @@ namespace Zelda {
 
         // 背包 有添加物品 和 移除物品的方法 关闭背包的方法
         public void Add(int id, Sprite icon, int count) {
-
+            for(int i =0; i<elements.Count;i++){
+                Panel_BagElement ele = elements[i];
+                if(ele.id == -1){
+                    ele.Init(id,icon,count);
+                    break;
+                }
+            }
         }
         public void Remove(int id) {
 

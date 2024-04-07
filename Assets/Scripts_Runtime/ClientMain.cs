@@ -52,7 +52,9 @@ namespace Zelda {
             //=== Phase: Enter Game ===
             // ui.Login_Open();
             ui.Bag_Open(100);
-
+            for (int i = 0; i < 10; i++) {
+                ui.Bag_Add(i, null, 99);
+            }
 
 
         }
