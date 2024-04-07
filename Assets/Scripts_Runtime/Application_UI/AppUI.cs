@@ -14,6 +14,8 @@ namespace Zelda {
 
         Canvas worldCanvas;
         Panel_Login panel_Login;
+
+        Panel_Bag bag;
         Dictionary<int, HUD_HpBar> hpBars;
         public Action onStartHandle;
         public AppUI() {
@@ -31,7 +33,7 @@ namespace Zelda {
             this.screenCanvas = screenCanvas;
             this.worldCanvas = worldCanvas;
         }
-
+        // ==== Panel_Login ====
         public void Login_Open() {
 
             GameObject go = Open(nameof(Panel_Login), screenCanvas);
@@ -51,7 +53,7 @@ namespace Zelda {
 
 
 
-
+        // ==== Panel_HpBar ====
         // public void HpBar_Open(int id, float hp, float maxHp) {
         //     // if (hpBars == null) {
         //     //     hpBars = new Dictionary<int, GameObject>();
@@ -81,6 +83,31 @@ namespace Zelda {
             hpBars.TryGetValue(id, out HUD_HpBar hpBar);
             hpBar.SetPos(postion, cameraForward);
         }
+
+        //  ==== Panel_Bag ====
+        // 打开背包时生成空格子
+        public void Bag_Open(int maxSlotCount) {
+            if (bag == null) {
+
+                GameObject go = Open(nameof(Panel_Bag), screenCanvas);
+                Panel_Bag panel = go.GetComponent<Panel_Bag>();
+                panel.Ctor();
+                this.bag = panel;
+            }
+            bag.Init(maxSlotCount);
+        }
+        public void Bag_Add(int id, Sprite icon, int count) {
+            bag?.Add(id, icon, count);
+            // 等于bag不为空的时候才会调用
+        }
+
+        public void Bag_Close() {
+            bag?.Close();
+        }
+
+
+
+
         GameObject Open(string uiName, Canvas canvas) {
 
             bool has = assets.TryGetUIPrefab(uiName, out GameObject prefab);

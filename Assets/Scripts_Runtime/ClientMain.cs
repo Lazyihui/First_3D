@@ -50,10 +50,11 @@ namespace Zelda {
             assets.Load();
 
             //=== Phase: Enter Game ===
-            ui.Login_Open();
+            // ui.Login_Open();
+            ui.Bag_Open(100);
 
 
-            Debug.Log("hello");
+
         }
         //记笔记restTD 找出restDT为什么为0 √
         float restDT = 0;
