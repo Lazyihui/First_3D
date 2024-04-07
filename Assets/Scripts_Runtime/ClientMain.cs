@@ -71,7 +71,7 @@ namespace Zelda {
             // 这个代码保证了每一帧都会运行一次
             restDT += dt;// 0.0083 (0.0000000001, 10)
             if (restDT >= fixedDT) {
-                while (restDT > 0) {
+                while (restDT >= fixedDT) {
                     restDT -= fixedDT;
                     FixedTick(fixedDT);
                 }
