@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ namespace Zelda {
         [SerializeField] Panel_BagElement prefabElement;
         // 用来存储背包中的物品  用于记录物品的id
         List<Panel_BagElement> elements;
-
+        public Action<int> onUseHandle;
         public void Ctor() {
             elements = new List<Panel_BagElement>();
         }
@@ -17,18 +18,27 @@ namespace Zelda {
         public void Init(int maxSlotCount) {
             for (int i = 0; i < maxSlotCount; i++) {
                 Panel_BagElement ele = GameObject.Instantiate(prefabElement, group.transform);
+                ele.Ctor();
                 ele.Init(-1, null, 0);
                 elements.Add(ele);
+                // ele.onUseHandle = (id) => {
+                //     Remove(id);
+                // };
+                ele.onUseHandle = OnUse;
             }
 
         }
 
+        void OnUse(int id) {
+            Debug.Log("Use Item:" + id);
+        }
+
         // 背包 有添加物品 和 移除物品的方法 关闭背包的方法
         public void Add(int id, Sprite icon, int count) {
-            for(int i =0; i<elements.Count;i++){
+            for (int i = 0; i < elements.Count; i++) {
                 Panel_BagElement ele = elements[i];
-                if(ele.id == -1){
-                    ele.Init(id,icon,count);
+                if (ele.id == -1) {
+                    ele.Init(id, icon, count);
                     break;
                 }
             }

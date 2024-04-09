@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,7 +13,15 @@ namespace Zelda {
         [SerializeField] Image imgIcon;
         [SerializeField] Text txtCount;
 
-        public void Ctor() { }
+        [SerializeField] Button btnUse;
+
+        public Action<int> onUseHandle;
+
+        public void Ctor() { 
+            btnUse.onClick.AddListener(() => {
+                onUseHandle?.Invoke(id);
+            });
+        }
 
         public void Init(int id, Sprite icon, int count) {
             this.id = id;

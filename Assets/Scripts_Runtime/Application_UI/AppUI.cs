@@ -18,6 +18,8 @@ namespace Zelda {
         Panel_Bag bag;
         Dictionary<int, HUD_HpBar> hpBars;
         public Action onStartHandle;
+
+        public Action<int> Bag_onUseHandle;
         public AppUI() {
             hpBars = new Dictionary<int, HUD_HpBar>();
 
@@ -92,6 +94,9 @@ namespace Zelda {
                 GameObject go = Open(nameof(Panel_Bag), screenCanvas);
                 Panel_Bag panel = go.GetComponent<Panel_Bag>();
                 panel.Ctor();
+                panel.onUseHandle = (int id) => {
+                    Bag_onUseHandle?.Invoke(id);
+                };
                 this.bag = panel;
             }
             bag.Init(maxSlotCount);
