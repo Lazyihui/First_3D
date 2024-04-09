@@ -66,6 +66,16 @@ namespace Zelda {
         // 移除物品
 
         // 遍历物品
+        // 记笔记 用于遍历背包中的物品////////////////////////
+        public void Foreach(Action<BagItemModel> onEach) {
+            for (int i = 0; i < all.Length; i++) {
+                BagItemModel item = all[i];
+                if (item != null) {
+                    onEach.Invoke(item);
+                }
+            }
+        }
+
 
         public int GetMaxSlot() {
             return all.Length;
@@ -79,6 +89,8 @@ namespace Zelda {
             }
             return count;
         }
+
+
 
     }
 }

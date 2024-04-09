@@ -8,6 +8,7 @@ namespace Zelda {
 
             int occupiedSlot = owner.bagCom.GetOccpiedSlot();
             Debug.Log("Occupied Slot:" + occupiedSlot);
+            BagDomain.Open(ctx, owner.bagCom);
         }
         public static void FixedTick(GameContext ctx, float fixdt) {
 

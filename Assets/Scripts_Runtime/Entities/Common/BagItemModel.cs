@@ -1,3 +1,4 @@
+using UnityEngine;
 namespace Zelda {
 
 
@@ -9,6 +10,8 @@ namespace Zelda {
         public string name;
 
         public string description;
+
+        public Sprite icon;
 
 
         // 数量

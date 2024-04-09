@@ -51,13 +51,6 @@ namespace Zelda {
 
             //=== Phase: Enter Game ===
             ui.Login_Open();
-            ui.Bag_Open(100);
-            ui.Bag_onUseHandle = (id) => {
-                Debug.Log("Use Item:" + id);
-            };
-            for (int i = 0; i < 10; i++) {
-                ui.Bag_Add(i, null, 99);
-            }
 
 
         }
