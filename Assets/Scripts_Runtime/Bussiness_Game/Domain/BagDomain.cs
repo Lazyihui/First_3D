@@ -2,6 +2,16 @@ using UnityEngine;
 
 namespace Zelda {
     public static class BagDomain {
+
+        public static void Toggle(GameContext ctx, BagComponent bag) {
+            var ui = ctx.ui;
+            if(ui.Bag_IsOpen()) {
+                ui.Bag_Close();
+            } else {
+                Open(ctx, bag);
+            }
+         
+        }
         public static void Open(GameContext ctx, BagComponent bag) {
 
             var ui = ctx.ui;

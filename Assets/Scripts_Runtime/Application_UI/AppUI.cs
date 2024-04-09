@@ -109,7 +109,9 @@ namespace Zelda {
         public void Bag_Close() {
             bag?.Close();
         }
-
+        public bool Bag_IsOpen() {
+            return bag != null;
+        }
 
 
 

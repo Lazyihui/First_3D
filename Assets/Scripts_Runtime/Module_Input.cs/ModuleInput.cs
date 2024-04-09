@@ -6,6 +6,8 @@ namespace Zelda {
         public bool isAttack;//攻击
 
         public bool isJump;//跳跃
+
+        public bool isUIToggleBag;//打开背包
         public Vector3 moveCmaeraDir;
 
         public Vector2 cameraRotationAxis;
@@ -49,13 +51,16 @@ namespace Zelda {
             // === 跳跃 ===
             this.isJump = Input.GetKeyDown(KeyCode.Space);
             // === 相机旋转 ===
-            if(Input.GetMouseButton(1)){
+            if (Input.GetMouseButton(1)) {
                 // float x = Input.GetAxis("Mouse X");
                 // float y = Input.GetAxis("Mouse Y");
                 // moveRoationAxis = new Vector3(x, y, 0);
                 //delta是上一帧和这一帧的差值
                 cameraRotationAxis = Input.mousePositionDelta;
             }
+            // ==== UI: Bag ====
+            isUIToggleBag = Input.GetKeyDown(KeyCode.B);
         }
+
     }
 }

@@ -8,7 +8,6 @@ namespace Zelda {
 
             int occupiedSlot = owner.bagCom.GetOccpiedSlot();
             Debug.Log("Occupied Slot:" + occupiedSlot);
-            BagDomain.Open(ctx, owner.bagCom);
         }
         public static void FixedTick(GameContext ctx, float fixdt) {
 
@@ -49,6 +48,10 @@ namespace Zelda {
             // moduleCamera.Rotate(ctx.input.cameraRotationAxis,dt);
             // moduleCamera.RotateByEuler(ctx.input.cameraRoationAxis,dt);
             moduleCamera.Round(role.transform.position, ctx.input.cameraRotationAxis, new Vector2(0, 0), 5, dt);
+            ModuleInput input = ctx.input;
+            if (input.isUIToggleBag) {
+                BagDomain.Toggle(ctx, role.bagCom);
+            }
 
         }
         // 检测地面代码
