@@ -29,6 +29,8 @@ namespace Zelda {
         public BagComponent bagCom;
         public Action<RoleEntity, Collision> OnCollisionEnterHandle;
 
+        public Action<RoleEntity, Collider> OnTriggerEnterHandle;
+
         public void Ctor() {
             bagCom = new BagComponent();
         }
@@ -157,6 +159,8 @@ namespace Zelda {
         }
 
         void OnTriggerEnter(Collider other) {
+            OnTriggerEnterHandle.Invoke(this, other);
+
         }
         void OnTriggerStay(Collider other) {
         }

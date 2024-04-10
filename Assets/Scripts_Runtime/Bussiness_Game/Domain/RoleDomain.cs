@@ -7,13 +7,29 @@ namespace Zelda {
     public static class RoleDomain {
 
         public static RoleEntity Spawn(GameContext ctx, int typeID) {
-            RoleEntity role = GameFactory.Role_Create(ctx.assets, typeID);
+            RoleEntity role = GameFactory.Role_Create(ctx.assets, typeID,ctx.idServices);
 
             // UI
             ctx.ui.HpBar_Open(role.id, role.hp, role.maxHp);
 
             // 这里是一个委托
             role.OnCollisionEnterHandle = OnCollisionEnter;
+
+            role.OnTriggerEnterHandle = (role, other) => {
+
+                LootEntity loot = other.gameObject.GetComponent<LootEntity>();
+                if(loot!=null){
+                    Debug.Log("拾取了物品"+loot.itemTypeDI);
+                }
+
+                Debug.Log("OnTriggerEnterHandle");
+                // if (other.gameObject.CompareTag("Loot")) {
+                //     // LootEntity loot = other.gameObject.GetComponent<LootEntity>();
+                //     // role.bagCom.Add(loot.itemTypeDI, loot.count);
+                //     // ctx.lootRepository.Remove(loot);
+                //     // GameObject.Destroy(other.gameObject);
+                // }
+            };
             ctx.roleRepository.Add(role);
             return role;
         }

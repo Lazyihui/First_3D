@@ -8,9 +8,14 @@ namespace Zelda {
         public ModuleInput input;
         public ModuleCamera moduleCamera;
         public RoleRepository roleRepository;
+        public LootRepository lootRepository;
+
+        public IDSercices idServices;
 
         public GameContext() {
             roleRepository = new RoleRepository();
+            idServices = new IDSercices();
+            lootRepository = new LootRepository();
         }
 
         public void Inject(AppUI ui,ModuleAssets assets, ModuleInput input, ModuleCamera moduleCamera) {

@@ -6,8 +6,14 @@ namespace Zelda {
             RoleEntity owner = RoleDomain.Spawn(ctx, 0);
             ctx.onwerRoleID = owner.id;
 
-            int occupiedSlot = owner.bagCom.GetOccpiedSlot();
-            Debug.Log("Occupied Slot:" + occupiedSlot);
+            // int occupiedSlot = owner.bagCom.GetOccpiedSlot();
+            LootEntity loot1 = LootDomain.Spawn(ctx, 1, 1, new Vector3(0, 1, 5));
+            LootEntity loot2 = LootDomain.Spawn(ctx, 2, 1, new Vector3(2, 1, 8));
+            LootEntity loot3 = LootDomain.Spawn(ctx, 3, 1, new Vector3(1, 1, 1));
+            
+
+
+
         }
         public static void FixedTick(GameContext ctx, float fixdt) {
 
