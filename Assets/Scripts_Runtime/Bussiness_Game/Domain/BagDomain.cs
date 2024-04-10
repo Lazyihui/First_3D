@@ -27,5 +27,15 @@ namespace Zelda {
             };
         }
 
+        public static void Update(GameContext ctx, BagComponent bag) {
+
+            var ui = ctx.ui;
+            if(ui.Bag_IsOpen()){
+                ui.Bag_Close();
+                Open(ctx, bag);
+            }
+
+        }
+
     }
 }

@@ -37,7 +37,7 @@ namespace Zelda {
                         Debug.Log("背包满了");
 
                     }
-                    ctx.ui.Bag_Updata();
+                    BagDomain.Update(ctx, role.bagCom);
 
                 }
 

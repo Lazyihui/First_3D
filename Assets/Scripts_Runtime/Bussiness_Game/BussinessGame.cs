@@ -9,10 +9,10 @@ namespace Zelda {
             // int occupiedSlot = owner.bagCom.GetOccpiedSlot();
             LootEntity loot1 = LootDomain.Spawn(ctx, 1, 10, new Vector3(0, 1, 5));
             LootEntity loot2 = LootDomain.Spawn(ctx, 2, 10, new Vector3(2, 1, 8));
-            LootEntity loot3 = LootDomain.Spawn(ctx, 3, 10, new Vector3(1, 1, 1));
+            LootEntity loot3 = LootDomain.Spawn(ctx, 4, 10, new Vector3(1, 1, 1));
             LootEntity loot4 = LootDomain.Spawn(ctx, 3, 10, new Vector3(2, 1, 1));
-            LootEntity loot5 = LootDomain.Spawn(ctx, 3, 10, new Vector3(3, 1, 1));
-            LootEntity loot6 = LootDomain.Spawn(ctx, 3, 10, new Vector3(4, 1, 1));
+            LootEntity loot5 = LootDomain.Spawn(ctx, 8, 10, new Vector3(3, 1, 1));
+            LootEntity loot6 = LootDomain.Spawn(ctx, 7, 10, new Vector3(4, 1, 1));
 
 
 
