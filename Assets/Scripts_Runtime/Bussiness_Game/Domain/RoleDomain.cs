@@ -7,7 +7,7 @@ namespace Zelda {
     public static class RoleDomain {
 
         public static RoleEntity Spawn(GameContext ctx, int typeID) {
-            RoleEntity role = GameFactory.Role_Create(ctx.assets, typeID,ctx.idServices);
+            RoleEntity role = GameFactory.Role_Create(ctx.assets, typeID, ctx.idServices);
 
             // UI
             ctx.ui.HpBar_Open(role.id, role.hp, role.maxHp);
@@ -18,11 +18,29 @@ namespace Zelda {
             role.OnTriggerEnterHandle = (role, other) => {
 
                 LootEntity loot = other.gameObject.GetComponent<LootEntity>();
-                if(loot!=null){
-                    Debug.Log("拾取了物品"+loot.itemTypeDI);
+                if (loot != null) {
+                    // 放到背包
+                    bool isPicked = role.bagCom.Add(loot.itemTypeDI, loot.itemCount, () => {
+                        BagItemModel item = new BagItemModel();
+
+                        item.id = ctx.idServices.itemIDRecord++;
+                        item.count = loot.itemCount;
+                        return item;
+                    });
+
+                    // 从场景中移除
+                    if (isPicked) {
+                        LootDomain.UnSpawn(ctx, loot);
+                    } else {
+                        // 背包满了
+                        // 做一个UI提示
+                        Debug.Log("背包满了");
+
+                    }
+                    ctx.ui.Bag_Updata();
+
                 }
 
-                Debug.Log("OnTriggerEnterHandle");
                 // if (other.gameObject.CompareTag("Loot")) {
                 //     // LootEntity loot = other.gameObject.GetComponent<LootEntity>();
                 //     // role.bagCom.Add(loot.itemTypeDI, loot.count);
@@ -41,9 +59,9 @@ namespace Zelda {
         }
 
 
-        public static void UpdateHUD(GameContext ctx, Vector3 cameraForward,RoleEntity role) {
+        public static void UpdateHUD(GameContext ctx, Vector3 cameraForward, RoleEntity role) {
             // 更新血条
-            ctx.ui.HpBar_UpdataPostion(role.id, role.transform.position + Vector3.up * 2.5f,cameraForward);
+            ctx.ui.HpBar_UpdataPostion(role.id, role.transform.position + Vector3.up * 2.5f, cameraForward);
         }
     }
 }

@@ -112,7 +112,16 @@ namespace Zelda {
         public bool Bag_IsOpen() {
             return bag != null;
         }
+        // 刷新背包
+        public void Bag_Updata() {
+            // if (Bag_IsOpen()) {
+            //     Bag_Close();
+            // } else {
+            //     Bag_Open(20);
+            // }
 
+            // 什么都不做
+        }
 
 
         GameObject Open(string uiName, Canvas canvas) {
