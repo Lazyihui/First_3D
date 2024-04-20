@@ -47,7 +47,7 @@ namespace Zelda {
 
 
             RoleDomain.UpdateHUD(ctx, moduleCamera.camera.transform.forward, role);
-
+            
             // 相机看向
             // moduleCamera.LookAt(role.transform.position);
             // 注：看向会影响旋转，所以旋转失效
@@ -63,6 +63,8 @@ namespace Zelda {
             }
 
         }
+
+        
         // 检测地面代码
         static void CheckGround(RoleEntity role) {
             RaycastHit[] hits = Physics.RaycastAll(role.transform.position + Vector3.up, Vector3.down, 1.05f);

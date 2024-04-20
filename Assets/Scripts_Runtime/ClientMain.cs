@@ -13,6 +13,7 @@ namespace Zelda {
         [SerializeField] Canvas worldCanvas;
 
 
+
         AppUI ui;
         ModuleInput input;
 
@@ -52,8 +53,9 @@ namespace Zelda {
             //=== Phase: Enter Game ===
             ui.Login_Open();
 
-
         }
+
+
         //记笔记restTD 找出restDT为什么为0 √
         float restDT = 0;
         // Update is called once per frame
@@ -100,6 +102,7 @@ namespace Zelda {
         void OnDestroy() {
             TearDown();
         }
+        
         void TearDown() {
             if (isTearDown) {
                 return;

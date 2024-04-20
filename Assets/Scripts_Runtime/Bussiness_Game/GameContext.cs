@@ -10,11 +10,11 @@ namespace Zelda {
         public RoleRepository roleRepository;
         public LootRepository lootRepository;
 
-        public IDSercices idServices;
+        public IDSercices idServics;
 
         public GameContext() {
             roleRepository = new RoleRepository();
-            idServices = new IDSercices();
+            idServics = new IDSercices();
             lootRepository = new LootRepository();
         }
 

@@ -7,50 +7,51 @@ namespace Zelda {
     public static class RoleDomain {
 
         public static RoleEntity Spawn(GameContext ctx, int typeID) {
-            RoleEntity role = GameFactory.Role_Create(ctx.assets, typeID, ctx.idServices);
+            RoleEntity role = GameFactory.Role_Create(ctx.assets, typeID, ctx.idServics);
 
-            // UI
-            ctx.ui.HpBar_Open(role.id, role.hp, role.maxHp);
+
 
             // 这里是一个委托
             role.OnCollisionEnterHandle = OnCollisionEnter;
 
             role.OnTriggerEnterHandle = (role, other) => {
+                OnTriggerEnter(ctx, role, other);
 
-                LootEntity loot = other.gameObject.GetComponent<LootEntity>();
-                if (loot != null) {
-                    // 放到背包
-                    bool isPicked = role.bagCom.Add(loot.itemTypeDI, loot.itemCount, () => {
-                        BagItemModel item = new BagItemModel();
-
-                        item.id = ctx.idServices.itemIDRecord++;
-                        item.count = loot.itemCount;
-                        return item;
-                    });
-
-                    // 从场景中移除
-                    if (isPicked) {
-                        LootDomain.UnSpawn(ctx, loot);
-                    } else {
-                        // 背包满了
-                        // 做一个UI提示
-                        Debug.Log("背包满了");
-
-                    }
-                    BagDomain.Update(ctx, role.bagCom);
-
-                }
-
-                // if (other.gameObject.CompareTag("Loot")) {
-                //     // LootEntity loot = other.gameObject.GetComponent<LootEntity>();
-                //     // role.bagCom.Add(loot.itemTypeDI, loot.count);
-                //     // ctx.lootRepository.Remove(loot);
-                //     // GameObject.Destroy(other.gameObject);
-                // }
             };
+
+            // UI
+            ctx.ui.HpBar_Open(role.id, role.hp, role.maxHp);
+
             ctx.roleRepository.Add(role);
             return role;
         }
+
+        public static void OnTriggerEnter(GameContext ctx, RoleEntity role, Collider other) {
+            LootEntity loot = other.GetComponent<LootEntity>();
+            if (loot != null) {
+                bool isPicked = role.bagCom.Add(loot.itemTypeDI, loot.itemCount, () => {
+                    BagItemModel item = new BagItemModel();
+                    // 从模板表里读取物品信息
+                    item.id = ctx.idServics.itemIDRecord++;
+                    item.typeID = loot.itemTypeDI;
+                    item.count = loot.itemCount;
+                    return item;
+                });
+                // 2. 移除 Loot
+                if (isPicked) {
+                    LootDomain.UnSpawn(ctx, loot);
+                } else {
+                    // 弹窗/浮字提示: 背包满了
+                    Debug.LogWarning("背包满了");
+                }
+
+                // 3. 如果背包是打开着的, 则刷新背包
+                BagDomain.Update(ctx, role.bagCom);
+
+            }
+        }
+
+
         // 委托的实现 就是直接等于就好了 是语法
         static void OnCollisionEnter(RoleEntity role, Collision other) {
             if (other.gameObject.CompareTag("Ground")) {
